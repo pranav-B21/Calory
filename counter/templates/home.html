@@ -55,7 +55,7 @@
                             <h2 class="mt-3 mb-4">Nutritional Values </h2><span></span>
                             <ul>
                                 <li class="servingsize">Serving Size per 100/Grams <span class="float-end"></span></li>
-                                <<li>Carbohydrates: <span class="float-end">{{api.0.carbohydrates_total_g}}</span></li>
+                                <li>Carbohydrates: <span class="float-end">{{api.0.carbohydrates_total_g}}</span></li>
                                 <li>Cholesterol: <span class="float-end">{{api.0.cholesterol_mg}}</span></li>
                                 <li>Saturated fat: <span class="float-end">{{api.0.fat_saturated_g}}</span></li>
                                 <li>Total Fat: <span class="float-end">{{api.0.fat_saturated_g}}</span></li>
@@ -106,12 +106,54 @@
                                     <p>you will have to brisk walk for <strong> {{api.0.calories | div:294|mul:60|floatformat:0}}  </strong> Minutes</p>
                                 </div>
                             </div>
+                            </div>
+                            <canvas id="myChart" width="1000" height="400"></canvas>
                         </div>
                     </div>
                 </div>
                 {%endif%}
                 {%endif%}
             </div>
-</body>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('myChart');
+              
+                new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                    labels: ['carbohydrates', 'Cholesterol', 'Saturated fat', 'Total Fat', 'Fiber Content', 'Potassium', 'Protein','Sodium','Sugar'],
+                    datasets: [{
+                      label: 'Nutritional Value of {{api.0.name | capfirst}}',
+                      data: [
 
+                    parseInt(`{{api.0.cholesterol_mg}}`),
+                    parseInt(`{{api.0.fat_saturated_g}}`),
+                    parseInt(`{{api.0.fat_polyunsaturated_g}}`),
+                    parseInt(`{{api.0.fat_total_g}}`),
+                    parseInt(`{{api.0.potassium_mg}}`),
+                    parseInt(`{{api.0.protein_g}}`),
+                    parseInt(`{{api.0.sodium_mg}}`),
+                    parseInt(`{{api.0.sugar_g}}`),
+
+
+
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    response: true,
+                    maintainAspectRation: false,
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              </script>
+              
+                
+</body>
 </html>
