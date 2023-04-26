@@ -1,23 +1,30 @@
-"""
-URL configuration for calory project.
+# from django.shortcuts import render
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+
+# # Create your views here.
+# def home(request):
+#     import json
+#     import requests
+#     if request.method == 'POST':
+#         query = request.POST['query']
+#         api_url = 'https://api.api-ninjas.com/v1/nutrition?query='
+#         api_request = requests.get(
+#             api_url + query, headers={'X-Api-Key': 'YOUR-API-KEY'})
+#         try:
+#             api = json.loads(api_request.content)
+#             print(api_request.content)
+#         except Exception as e:
+#             api = "oops! There was an error"
+#             print(e)
+#         return render(request, 'home.html', {'api': api})
+#     else:
+#         return render(request, 'home.html', {'query': 'Enter a valid query'})
+
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('counter.urls'))
+
 ]
